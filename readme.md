@@ -9,7 +9,7 @@ To run this project, follow these steps:
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your_username/hacker-news-integration.git
+   git clone https://github.com/femiir/hacker-news-integration.git
    ```
 
 2. Install the dependencies:
