@@ -1,0 +1,55 @@
+<!-- templates/news_list.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hacker News</title>
+</head>
+
+<body>
+
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'news-list' %}">All</a></li>
+            <li><a href="{% url 'news-list' %}?item_type=story">Stories</a></li>
+            <li><a href="{% url 'news-list' %}?item_type=comment">Comments</a></li>
+        </ul>
+        <form method="GET" action="{% url 'news-list' %}">
+            <input type="text" name="search" placeholder="Search..." value="{{ request.GET.search }}">
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+    <h1>Hacker News</h1>
+
+    <ul>
+        {% for news_item in news_items %}
+        <li>
+            <a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a>
+            <p>By: {{ news_item.by }}</p>
+        </li>
+        {% empty %}
+        <li>No news items available.</li>
+        {% endfor %}
+    </ul>
+
+    {% if news_items.has_previous or news_items.has_next %}
+    <div class="pagination">
+        {% if news_items.has_previous %}
+        <a href="?page={{ news_items.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current-page">{{ news_items.number }}</span>
+
+        {% if news_items.has_next %}
+        <a href="?page={{ news_items.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+
+</html>
+
+
+</html>

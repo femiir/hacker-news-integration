@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hacker News Detail</title>
+</head>
+
+<body>
+    {% load humanize %}
+    <div class="news-item">
+        <h2>{{ news_item.title }}</h2>
+        <p>By: {{ news_item.by }}</p>
+        <p>Score: {{ news_item.score }}</p>
+        <p>Descendants: {{ news_item.descendants }}</p>
+        <p>URL: <a href="{{ news_item.url }}">{{ news_item.url }}</a></p>
+    </div>
+
+    <h3>Comments</h3>
+    <ul class="comment-list">
+        {% for comment in comments %}
+        <li>
+            <div class="comment">
+                <p>By: {{ comment.comment.by }}</p>
+                <p>{{ comment.comment.text }}</p>
+            </div>
+            {% if comment.children %}
+            <ul class="nested-comments">
+                {% for child_comment in comment.children %}
+                <li>
+                    <div class="comment">
+                        <p>By: {{ child_comment.comment.by }}</p>
+                        <p>{{ child_comment.comment.text }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+
+</body>
+
+</html>
